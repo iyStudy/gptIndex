@@ -6,6 +6,8 @@ from pdf2image import convert_from_path
 import os
 import sys
 from tkinter import filedialog
+import pytesseract
+from llama_index.core import SimpleDirectoryReader,StorageContext, load_index_from_storage,VectorStoreIndex
 
 # logging.basicConfig(stream=sys.stdout, level=logging.DEBUG, force=True) # ログレベルの設定
 
@@ -63,7 +65,6 @@ def replace_circle_numbers(text):
     return text
 
 def pdf_to_markdown_ocr(pdf_path, output_md_path):
-    import pytesseract
     pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
     # PDFを画像に変換
@@ -102,10 +103,8 @@ def create_document(input_file_path):
 
 ### indexを作成する関数 ###
 def create_index():
-    from llama_index.core import SimpleDirectoryReader
     # ドキュメントの読み込み
     documents = SimpleDirectoryReader("input").load_data()
-    from llama_index.core import VectorStoreIndex
     # インデックスの作成
     index = VectorStoreIndex.from_documents(documents)
     # インデックスの保存
@@ -113,8 +112,6 @@ def create_index():
 
 ## インデックスを読み込む関数 ##
 def load_index():
-    
-    from llama_index.core import StorageContext, load_index_from_storage
     # rebuild storage context
     storage_context = StorageContext.from_defaults(persist_dir="./storage")
     # load index
