@@ -1,6 +1,5 @@
 import openai
-from config import API_KEY
-openai.api_key = API_KEY
+from config import API_KEY  # APIキーをconfig.pyから読み込む
 import logging
 import pdfplumber
 from pdf2image import convert_from_path
@@ -12,9 +11,10 @@ from tkinter import filedialog
 
 ## OpenAIのAPIキーが必要となります。
 # API_KEY = "openai_api_key"
+openai.api_key = API_KEY
 
 template = """あなたは世界中で信頼されているQAシステムです。
-事前知識ではなく、常に提供されたコンテキスト情報を使用してクエリに回答してください。
+事前知識ではなく、常に提供されたコンテキスト情報を使用して回答してください。
 従うべきいくつかのルール:
 1. 回答内で指定されたコンテキストを直接参照しないでください。
 2. 「コンテキストに基づいて、...」や「コンテキスト情報は...」、またはそれに類するような記述は避けてください。
