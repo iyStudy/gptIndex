@@ -1,3 +1,6 @@
+llama_indexとchatGPTを使用し
+指定したドキュメントから回答を生成するシステム
+
 ##  使用したver
 python 3.10  
 llama_index version v0.10.16
